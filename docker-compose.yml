@@ -1,0 +1,24 @@
+# Datei: postgresql/docker-compose.yml
+version: '3'
+services:
+  db:
+    image: postgres:10
+    environment:
+      POSTGRES_PASSWORD: geheim
+      POSTGRES_DB: geonames
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - pgdata:/var/lib/postgresql/data
+  pgadmin:
+    image: fenglc/pgadmin4
+    ports:
+      - 5050:5050
+    volumes:
+      - pgadmindata:/var/lib/pgadmin
+    environment:
+      DEFAULT_USER: info@dockerbuch.info
+      DEFAULT_PASSWORD: geheim
+volumes:
+  pgdata:
+  pgadmindata:
+
